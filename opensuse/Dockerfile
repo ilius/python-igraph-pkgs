@@ -1,11 +1,17 @@
-FROM debian:sid
+FROM opensuse/leap
 MAINTAINER Saeed Rasooli saeed.gnu@gmail.com
 LABEL Description="Simple Docker image that contains a pre-compiled version of igraph's Python interface"
 
 RUN zypper refresh
-RUN apt-get -y install build-essential libxml2-dev zlib1g-dev pkg-config libffi-dev libcairo-dev
-RUN apt-get -y install python3-dev
-RUN apt-get -y install python3-pip
+
+# build-essential
+
+RUN zypper install -y libxml2-devel zlib-devel pkg-config libffi-devel
+RUN zypper install -y cairo-devel
+RUN zypper install -y python3-devel
+RUN zypper install -y python3-pip
+
+
 RUN pip3 install python-igraph
 
 RUN zypper -y install rpm-build
